@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="sidebar">
+  <h2>MyAcademy</h2>
+  <a class="active">Dashboard</a>
+  <a href="student.html">Students</a>
+  <a href="attendance.html">Attendance</a>
+  <a href="report.html">Reports</a>
+  <a href="settings.html">Settings</a>
+</div>
+
+<div class="main">
+
+  <!-- Top Header -->
+  <div class="topbar">
+    <h1>Dashboard</h1>
+    <img src="https://via.placeholder.com/40" class="profile">
+  </div>
+
+  <!-- Cards Section -->
+  <div class="cards">
+
+    <div class="card">
+      <h3>Total Students</h3>
+      <p id="totalStudents">0</p>
+    </div>
+
+    <div class="card">
+      <h3>Present Today</h3>
+      <p id="presentToday">0</p>
+    </div>
+
+    <div class="card">
+      <h3>Absent Today</h3>
+      <p id="absentToday">0</p>
+    </div>
+
+    <div class="card">
+      <h3>Attendance %</h3>
+      <p id="attendancePercent">0</p>
+    </div>
+
+  </div>
+
+  <!-- Activity -->
+  <div class="activity">
+    <h2>Recent Activity</h2>
+    <ul>
+      <li>✔ Ali marked present</li>
+      <li>✔ Sara marked absent</li>
+      <li>✔ New student added</li>
+      <li>✔ Attendance updated</li>
+    </ul>
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

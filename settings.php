@@ -10,11 +10,11 @@
 
 <div class="sidebar">
   <h2>MyAcademy</h2>
-  <a href="dashboard.html">Dashboard</a>
-  <a href="students.html">Students</a>
-  <a href="attendance.html">Attendance</a>
-  <a href="report.html">Reports</a>
-  <a class="active" href="settings.html">Settings</a>
+  <a href="dashboard.php">Dashboard</a>
+  <a href="students.php">Students</a>
+  <a href="attendance.php">Attendance</a>
+  <a href="report.php">Reports</a>
+  <a class="active" href="settings.php">Settings</a>
 </div>
 
 <div class="main">

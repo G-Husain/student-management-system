@@ -1,3 +1,22 @@
+<?php
+session_start();
+include("db.php");
+
+// Security check
+if(!isset($_SESSION['user_id']) || $_SESSION['role'] != 'student'){
+    header("Location: login.php");
+    exit();
+}
+
+$student_id = $_SESSION['user_id'];
+?>
+<?php
+$query = "SELECT * FROM attendance WHERE user_id='$student_id'";
+$result = mysqli_query($conn, $query);
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,11 +30,11 @@
 
 <div class="sidebar">
   <h2>MyAcademy</h2>
-  <a href="dashboard.html">Dashboard</a>
-  <a class="active" href="students.html">Students</a>
-  <a href="attendance.html">Attendance</a>
-  <a href="report.html">Reports</a>
-  <a href="settings.html">Settings</a>
+  <!-- <a href="dashboard.php">Dashboard</a> -->
+  <a class="active" href="students.php">Students</a>
+  <!-- <a href="attendance.php">Attendance</a> -->
+  <!-- <a href="report.php">Reports</a>
+  <a href="settings.php">Settings</a> -->
 </div>
 
 <div class="main">

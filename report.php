@@ -1,55 +1,102 @@
+<?php
+session_start();
+include("db.php");
+
+/* Login check */
+if(!isset($_SESSION['user_id'])){
+    header("Location: login.php");
+    exit();
+}
+
+$user_id = $_SESSION['user_id'];
+$role = $_SESSION['role'];
+
+/* Admin report */
+if($role == 'admin'){
+
+    $totalStudents = mysqli_fetch_assoc(
+        mysqli_query($conn,"SELECT COUNT(*) AS total FROM users WHERE Role='student'")
+    )['total'];
+
+    $present = mysqli_fetch_assoc(
+        mysqli_query($conn,"SELECT COUNT(*) AS total FROM attendance WHERE status='present'")
+    )['total'];
+
+    $absent = mysqli_fetch_assoc(
+        mysqli_query($conn,"SELECT COUNT(*) AS total FROM attendance WHERE status='absent'")
+    )['total'];
+
+} 
+/* Student report */
+else {
+
+    $totalStudents = 1;
+
+    $present = mysqli_fetch_assoc(
+        mysqli_query($conn,"SELECT COUNT(*) AS total 
+        FROM attendance 
+        WHERE student_id='$user_id' AND status='present'")
+    )['total'];
+
+    $absent = mysqli_fetch_assoc(
+        mysqli_query($conn,"SELECT COUNT(*) AS total 
+        FROM attendance 
+        WHERE student_id='$user_id' AND status='absent'")
+    )['total'];
+}
+
+/* Attendance % */
+$total = $present + $absent;
+$percent = $total > 0 ? round(($present / $total) * 100) : 0;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reports</title>
 <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="sidebar">
   <h2>MyAcademy</h2>
   <a href="dashboard.php">Dashboard</a>
-  <a href="student.php">Students</a>
-  <a href="attendance.php">Attendance</a>
-  <a class="active" href="reports.php">Reports</a>
-  <a href="settings.php">Settings</a>
+
+  <?php if($role == 'admin'){ ?>
+    <a href="student.php">Students</a>
+    <a href="attendance.php">Attendance</a>
+  <?php } ?>
+
+  <a class="active" href="report.php">Reports</a>
+  <a href="logout.php">Logout</a>
 </div>
 
 <div class="main">
 
-  <!-- Topbar -->
   <div class="topbar">
-    <h1>Reports</h1>
-    <img src="https://via.placeholder.com/40" class="profile">
+    <h1>Attendance Report</h1>
   </div>
 
-  <!-- Cards Section -->
   <div class="cards">
     <div class="card">
-      <h3>Total Students</h3>
-      <p>250</p>
+      <h3><?php echo ($role=='admin') ? 'Total Students' : 'Student'; ?></h3>
+      <p><?php echo $totalStudents; ?></p>
     </div>
+
     <div class="card">
-      <h3>Present Today</h3>
-      <p>138</p>
+      <h3>Present</h3>
+      <p><?php echo $present; ?></p>
     </div>
+
     <div class="card">
-      <h3>Absent Today</h3>
-      <p>112</p>
+      <h3>Absent</h3>
+      <p><?php echo $absent; ?></p>
     </div>
+
     <div class="card">
       <h3>Attendance %</h3>
-      <p>88%</p>
-    </div>
-  </div>
-
-  <!-- Chart Section -->
-  <div class="chart-section">
-    <h2>Attendance Chart</h2>
-    <div class="chart-placeholder">
-      Chart will appear here
+      <p><?php echo $percent; ?>%</p>
     </div>
   </div>
 

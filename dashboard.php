@@ -13,7 +13,7 @@ $role = $_SESSION['role'];
 ?>
 
 <?php
-if($role == 'admin'){
+// if($role == 'admin'){
 
     $totalStudents = mysqli_fetch_assoc(
         mysqli_query($conn,"SELECT COUNT(*) as total FROM users WHERE Role='student'")
@@ -30,19 +30,19 @@ if($role == 'admin'){
     $total = $presentToday + $absentToday;
     $attendancePercent = $total > 0 ? round(($presentToday/$total)*100) : 0;
 
-} else {
+// } else {
 
-    $present = mysqli_fetch_assoc(
-        mysqli_query($conn,"SELECT COUNT(*) as total FROM attendance WHERE student_id='$user_id' AND status='present'")
-    )['total'];
+    // $present = mysqli_fetch_assoc(
+    //     mysqli_query($conn,"SELECT COUNT(*) as total FROM attendance WHERE student_id='$user_id' AND status='present'")
+    // )['total'];
 
-    $absent = mysqli_fetch_assoc(
-        mysqli_query($conn,"SELECT COUNT(*) as total FROM attendance WHERE student_id='$user_id' AND status='absent'")
-    )['total'];
+    // $absent = mysqli_fetch_assoc(
+    //     mysqli_query($conn,"SELECT COUNT(*) as total FROM attendance WHERE student_id='$user_id' AND status='absent'")
+    // )['total'];
 
-    $total = $present + $absent;
-    $attendancePercent = $total > 0 ? round(($present/$total)*100) : 0;
-}
+    // $total = $present + $absent;
+    // $attendancePercent = $total > 0 ? round(($present/$total)*100) : 0;
+// }
 ?>
 
 
@@ -71,11 +71,11 @@ if($role == 'admin'){
       <a href="settings.php">Settings</a>
   <?php } ?>
 
-  <?php if($role == 'student'){ ?>
+  <!-- <?php if($role == 'student'){ ?>
       <a href="attendance.php">My Attendance</a>
       <a href="report.php">My Report</a>
       <a href="settings.php">Settings</a>
-  <?php } ?>
+  <?php } ?> -->
 
   <a href="logout.php">Logout</a>
 </div>
@@ -92,7 +92,7 @@ if($role == 'admin'){
   <!-- Cards Section -->
  <div class="cards">
 
-<?php if($role == 'admin'){ ?>
+<!-- <?php if($role == 'admin'){ ?> -->
 
   <div class="card">
     <h3>Total Students</h3>
@@ -108,7 +108,7 @@ if($role == 'admin'){
     <h3>Absent Today</h3>
     <p><?php echo $absentToday; ?></p>
   </div>
-
+<!-- 
 <?php } else { ?>
 
   <div class="card">
@@ -121,7 +121,7 @@ if($role == 'admin'){
     <p><?php echo $absent; ?></p>
   </div>
 
-<?php } ?>
+<?php } ?> -->
 
   <div class="card">
     <h3>Attendance %</h3>

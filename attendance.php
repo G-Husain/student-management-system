@@ -2,105 +2,169 @@
 session_start();
 include("db.php");
 
-/* Admin security */
-if(!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin'){
+/* =========================
+   ADMIN SECURITY
+========================= */
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
     header("Location: login.php");
     exit();
 }
 
-/* Attendance insert */
-if(isset($_GET['student_id']) && isset($_GET['status'])){
-    $student_id = $_GET['student_id'];
-    $status = $_GET['status'];
-    $date = date("Y-m-d");
+/* =========================
+   MARK ATTENDANCE (POST)
+========================= */
+if (isset($_POST['student_id']) && isset($_POST['status'])) {
 
-    // duplicate check (same day)
-    $check = mysqli_query($conn,
-        "SELECT * FROM attendance 
+    $student_id = $_POST['student_id'];
+    $status     = $_POST['status'];
+    $date       = date("Y-m-d");
+
+    // check if attendance already exists for today
+    $check = mysqli_query(
+        $conn,
+        "SELECT id FROM attendance 
          WHERE student_id='$student_id' AND date='$date'"
     );
 
-    if(mysqli_num_rows($check) == 0){
-        mysqli_query($conn,
-            "INSERT INTO attendance (student_id,date,status)
-             VALUES ('$student_id','$date','$status')"
+    if (!$check) {
+        die("Check query failed: " . mysqli_error($conn));
+    }
+
+    if (mysqli_num_rows($check) == 0) {
+
+        mysqli_query(
+            $conn,
+            "INSERT INTO attendance (student_id, date, status)
+             VALUES ('$student_id', '$date', '$status')"
+        );
+
+    } else {
+
+        mysqli_query(
+            $conn,
+            "UPDATE attendance 
+             SET status='$status'
+             WHERE student_id='$student_id' AND date='$date'"
         );
     }
+
+    header("Location: attendance.php?success=1");
+    exit();
+}
+
+/* =========================
+   FETCH STUDENTS + TODAY STATUS
+========================= */
+$today = date("Y-m-d");
+
+$sql = "
+SELECT 
+    u.id,
+    u.name,
+    u.class,
+    a.status
+FROM users u
+LEFT JOIN attendance a 
+    ON u.id = a.student_id 
+    AND a.date = '$today'
+WHERE u.role = 'student'
+";
+
+$students = mysqli_query($conn, $sql);
+
+if (!$students) {
+    die("Student fetch failed: " . mysqli_error($conn));
 }
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Attendance</title>
 <link rel="stylesheet" href="style.css">
-
 </head>
+
 <body>
 
 <div class="sidebar">
   <h2>MyAcademy</h2>
-  <!-- <a href="dashboard.php">Dashboard</a>
-  <a href="student.php">Students</a> -->
-  <!-- <a class="active" href="attendance.php">Attendance</a>
-  <a href="report.php">Reports</a>
-  <a href="settings.php">Settings</a> -->
+  <a href="dashboard.php">Dashboard</a>
+  <a class="active" href="attendance.php">Attendance</a>
+  <a href="student.php">Students</a>
+  <a href="report.php">Reports</a> 
+  <a href="settings.php">Settings</a>
+  <a href="logout.php">Logout</a>
 </div>
 
 <div class="main">
 
-  <!-- Topbar -->
   <div class="topbar">
     <h1>Attendance</h1>
-    <img src="https://via.placeholder.com/40" class="profile">
   </div>
 
-  <!-- Attendance Table -->
+<?php if (isset($_GET['success'])) { ?>
+  <p style="color:green; font-weight:bold;">
+    Attendance marked successfully!
+  </p>
+<?php } ?>
+
   <div class="table-section">
-    <h2>Mark Attendance</h2>
+    <h2>Mark Attendance (<?php echo $today; ?>)</h2>
+
     <table>
       <thead>
         <tr>
-          <th>Roll</th>
+          <th>#</th>
           <th>Name</th>
           <th>Class</th>
+          <th>Status</th>
           <th>Present</th>
           <th>Absent</th>
         </tr>
       </thead>
-  <tbody>
+      <tbody>
 
 <?php
-$students = mysqli_query($conn,"SELECT id, Name, Class FROM users WHERE Role='student'");
 $roll = 1;
-
-while($s = mysqli_fetch_assoc($students)){
+while ($s = mysqli_fetch_assoc($students)) {
 ?>
 <tr>
   <td><?php echo $roll++; ?></td>
-  <td><?php echo $s['Name']; ?></td>
-  <td><?php echo $s['Class']; ?></td>
+  <td><?php echo htmlspecialchars($s['name']); ?></td>
+  <td><?php echo htmlspecialchars($s['class']); ?></td>
 
   <td>
-    <a href="attendance.php?student_id=<?php echo $s['id']; ?>&status=present">
-      <button class="presentBtn">Present</button>
-    </a>
+    <?php
+      if ($s['status'] == 'present') {
+          echo "<span style='color:green;font-weight:bold'>Present</span>";
+      } elseif ($s['status'] == 'absent') {
+          echo "<span style='color:red;font-weight:bold'>Absent</span>";
+      } else {
+          echo "<span style='color:gray'>Not Marked</span>";
+      }
+    ?>
   </td>
 
   <td>
-    <a href="attendance.php?student_id=<?php echo $s['id']; ?>&status=absent">
+    <form method="POST">
+      <input type="hidden" name="student_id" value="<?php echo $s['id']; ?>">
+      <input type="hidden" name="status" value="present">
+      <button class="presentBtn">Present</button>
+    </form>
+  </td>
+
+  <td>
+    <form method="POST">
+      <input type="hidden" name="student_id" value="<?php echo $s['id']; ?>">
+      <input type="hidden" name="status" value="absent">
       <button class="absentBtn">Absent</button>
-    </a>
+    </form>
   </td>
 </tr>
 <?php } ?>
 
-</tbody>
-
+      </tbody>
     </table>
   </div>
 

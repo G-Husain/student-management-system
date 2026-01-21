@@ -150,141 +150,12 @@ body {
   margin-bottom: 1px;
 }
 
-
-/* =====SIGN UP PAGE========= */
-/* From Uiverse.io by Yaya12085 */ 
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 350px;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 20px;
-  position: relative;
-}
-
-.title {
-  font-size: 28px;
-  color: royalblue;
-  font-weight: 600;
-  letter-spacing: -1px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding-left: 30px;
-}
-
-.title::before,.title::after {
-  position: absolute;
-  content: "";
-  height: 16px;
-  width: 16px;
-  border-radius: 50%;
-  left: 0px;
-  background-color: royalblue;
-}
-
-.title::before {
-  width: 18px;
-  height: 18px;
-  background-color: royalblue;
-}
-
-.title::after {
-  width: 18px;
-  height: 18px;
-  animation: pulse 1s linear infinite;
-}
-
-.message, .signin {
-  color: rgba(88, 87, 87, 0.822);
-  font-size: 14px;
-}
-
-.signin {
-  text-align: center;
-}
-
-.signin a {
-  color: royalblue;
-}
-
-.signin a:hover {
-  text-decoration: underline royalblue;
-}
-
-.flex {
-  display: flex;
-  width: 100%;
-  gap: 6px;
-}
-
-.form label {
-  position: relative;
-}
-
-.form label .input {
-  width: 100%;
-  padding: 10px 10px 20px 10px;
-  outline: 0;
-  border: 1px solid rgba(105, 105, 105, 0.397);
-  border-radius: 10px;
-}
-
-.form label .input + span {
-  position: absolute;
-  left: 10px;
-  top: 15px;
-  color: grey;
-  font-size: 0.9em;
-  cursor: text;
-  transition: 0.3s ease;
-}
-
-.form label .input:placeholder-shown + span {
-  top: 15px;
-  font-size: 0.9em;
-}
-
-.form label .input:focus + span,.form label .input:valid + span {
-  top: 30px;
-  font-size: 0.7em;
-  font-weight: 600;
-}
-
-.form label .input:valid + span {
-  color: green;
-}
-
-.submit {
-  border: none;
-  outline: none;
-  background-color: royalblue;
-  padding: 10px;
-  border-radius: 10px;
-  color: #fff;
-  font-size: 16px;
-  transform: .3s ease;
-}
-
-.submit:hover {
-  background-color: rgb(56, 90, 194);
-}
-
-@keyframes pulse {
-  from {
-    transform: scale(0.9);
-    opacity: 1;
-  }
-
-  to {
-    transform: scale(1.8);
-    opacity: 0;
-  }
-}
-
 /* ====dashboard===== */
+/* Cards color tweak for student */
+.cards .card p {
+  color: #FF6F61; /* student dashboard highlight color */
+}
+
 
 /* Sidebar */
 .sidebar {
@@ -389,135 +260,145 @@ body {
 /* ====student page=== */
 
 
+/* ============ Sidebar ============ */
+body{
+  margin-top: 30pxs;
+  border: 2px solid rgb(183, 0, 255);
+}
 .sidebar {
-  width: 230px;
-  height: 100vh;
-  background: #0f6cff;
-  color: white;
-  padding: 20px;
-  position: fixed;
-  top: 0;
-  left: 0;
+  border: 2px solid red;
+    width: 230px;
+    height: 100vh;
+    background: #0f6cff;
+    color: white;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
 .sidebar h2 {
-  margin-bottom: 30px;
+    margin-bottom: 30px;
 }
 
 .sidebar a {
-  display: block;
-  padding: 12px 10px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  color: white;
-  text-decoration: none;
+    display: block;
+    padding: 12px 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
 }
 
 .sidebar a:hover,
 .sidebar a.active {
-  background: white;
-  color: #0f6cff;
+    background: white;
+    color: #0f6cff;
 }
 
+/* ============ Main Section ============ */
 .main {
-  margin-left: 250px;
-  padding: 20px;
+  border: 2px solid rgb(0, 115, 255);
+    margin-left: 250px;
+    width: 100%;
 }
 
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.topbar h1 {
-  margin: 0;
-}
-
-.profile {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
-
-/* Form Section */
-.form-section {
-  background: white;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  margin-bottom: 30px;
-}
-
-.form-section h2 {
-  margin-top: 0;
-  color: #0f6cff;
-}
-
-.form-section input {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border-radius: 10px;
-  border: 1px solid #c0c0c0;
-  outline: none;
-}
-
-.form-section button {
-  padding: 12px 20px;
-  background: #0f6cff;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.form-section button:hover {
-  background: #075ac2;
-}
-
-/* Table Section */
+/* ============ Table Section ============ */
 .table-section {
-  background: white;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-top: 30px;
+  border: 2px solid  #0f6cff;
+    flex: 2;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    overflow-x: auto; 
 }
 
 .table-section h2 {
-  color: #0f6cff;
-  margin-top: 0;
+    color: #0f6cff;
+    margin-bottom: 15px;
 }
 
 table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 15px;
+  /* border: 2px solid red; */
+    width: 100%;
 }
 
 th, td {
-  padding: 12px;
-  border-bottom: 1px solid #ddd;
-  text-align: left;
+    border: 1.5px solid #ddd;
+    font-size: 16px;
+  text-align: center !important;
 }
 
 th {
-  background: #f0f0f0;
+    background: #f0f0f0;
 }
 
-button.deleteBtn {
-  padding: 6px 10px;
-  background: crimson;
+#upd_btn{
+    padding: 6px 10px;          /* button ka size */
+    background:rgba(15, 108, 255,0.9);          /* button ka background color */               /* button ke text ka color */
+    border: none;                /* border hata diya */
+    border-radius: 6px;          /* button ko thoda rounded corners */
+    cursor: pointer;   
+}
+#dlt_btn{
+     padding: 6px 10px;          /* button ka size */
+    background:rgba(255, 0, 0,0.7);          /* button ka background color */               /* button ke text ka color */
+    border: none;                /* border hata diya */
+    border-radius: 6px;          /* button ko thoda rounded corners */
+    cursor: pointer;   
+}
+button a{
   color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+  text-decoration: none;
 }
 
-button.deleteBtn:hover {
-  background: #b80000;
+/* ============ Login Form ============ */
+.form-container {
+    width: 350px;
+    margin: 100px auto;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 10px;
+    padding: 20px 30px;
 }
+
+.form-container .title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 30px;
+}
+
+.form-container .input {
+    border-radius: 20px;
+    border: 1px solid #c0c0c0;
+    padding: 12px 15px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.form-container .form-btn {
+    padding: 10px 15px;
+    width: 100%;
+    background: teal;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.form-container .form-btn:hover {
+    background: #006666;
+}
+
+/* ============ Responsive ============ */
+@media screen and (max-width: 900px) {
+    .main {
+        flex-direction: column;
+    }
+}
+
 
 /* =====attendence===== */
 

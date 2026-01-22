@@ -1,5 +1,9 @@
 <?php
 session_start();
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+
 include("db.php");
 
 /* =========================
@@ -66,20 +70,21 @@ button.absent:hover { background-color: #c82333; }
 
 <body>
 
-<div class="sidebar">
+<div class="sidebar_atndc" style="width: 230px;" >
   <h2>MyAcademy</h2>
   <a href="dashboard.php">Dashboard</a>
-  <a class="active" href="attendance.php">Attendance</a>
   <a href="student.php">Students</a>
+  <a class="active" href="attendance.php">Attendance</a>
   <a href="report.php">Reports</a> 
-  <a href="settings.php">Settings</a>
-  <a href="logout.php">Logout</a>
+ <a href="logout.php">Logout</a>
 </div>
 
 <div class="main">
 
   <div class="topbar">
-    <h1>Attendance</h1>
+  <h1>Mark Student Attendance</h1>
+<p style="font-size: 18px;">Admin panel for marking daily attendance</p>
+
   </div>
 
   <div class="table-section">

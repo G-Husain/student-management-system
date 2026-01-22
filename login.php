@@ -58,11 +58,12 @@ if(isset($_POST['login'])){
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
 </head>
-<body>
+<body style="background-color:gold;">
     
 
  <div class="form-container">
-      <p class="title">Welcome back</p>
+      <p class="title">Welcome to MyAcademy <p>
+<p style="text-align: center;">Please login to continue</p>
       <form class="form"    method="POST" action="">
        <input type="email" name="email" class="input" placeholder="Email" required>
 <input type="password" name="password" class="input" placeholder="Password" required>

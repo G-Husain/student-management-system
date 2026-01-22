@@ -57,8 +57,13 @@ if(isset($_POST['login'])){
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
+    <style>
+        body{
+            background-image: url(./images\ \(1\).jfif);
+        }
+    </style>
 </head>
-<body style="background-color:gold;">
+<body>
     
 
  <div class="form-container">

@@ -467,7 +467,8 @@ button a{
 }
 
 table {
-  width: 100%;
+    border: 2px solid rgb(215, 43, 221);
+  width: 100;
   border-collapse: collapse;
   margin-top: 15px;
 }
@@ -483,32 +484,21 @@ th {
 }
 
 /* Present / Absent Buttons */
-button.presentBtn {
-  padding: 6px 10px;
-  background: green;
+td button a{
+  text-decoration: none;
   color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-right: 5px;
+}
+#present_btn{
+  font-size: 13px;
+  padding: 5px;
+  background-color: rgba(0, 128, 1,0.7);
+}
+#absent_btn{
+  font-size: 13px;
+  padding: 5px;
+  background-color: rgba(255, 0, 0,0.7);
 }
 
-button.presentBtn:hover {
-  background: #0a7a0a;
-}
-
-button.absentBtn {
-  padding: 6px 10px;
-  background: crimson;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-button.absentBtn:hover {
-  background: #b80000;
-}
 
 /* ====report page=== */
 

@@ -71,7 +71,7 @@ while ($row = mysqli_fetch_assoc($result)) {
   <td><?php echo htmlspecialchars($row['class']); ?></td>
   <td><?php echo htmlspecialchars($row['roll_no']); ?></td>
   <td>
-   <button id="upd_btn"><a href="">Update</a></button><button id="dlt_btn"><a href="">Delete</a></button>
+   <button id="upd_btn"><a href="">Update</a></button> &nbsp;<button id="dlt_btn"><a href="">Delete</a></button>
   </td>
 </tr>
 <?php } ?>
